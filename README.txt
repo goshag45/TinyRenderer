@@ -1,1 +1,2 @@
-[# Tiny Renderer in C++ ](https://haqr.eu/tinyrenderer/)
+# Tiny Renderer in C++
+https://haqr.eu/tinyrenderer/
