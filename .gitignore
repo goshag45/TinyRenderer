@@ -2,3 +2,6 @@ framebuffer.tga
 
 build
 build/*
+
+.vscode
+.vscode/
