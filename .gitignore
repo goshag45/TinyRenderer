@@ -1,7 +1,12 @@
 framebuffer.tga
+CMakeCache.txt
+
 
 build
 build/*
 
 .vscode
-.vscode/
+.vscode/*
+
+CmakeFiles
+CmakeFiles/*
