@@ -20,17 +20,15 @@ void line(int ax, int ay, int bx, int by, TGAImage &framebuffer, TGAColor color)
         std::swap(ay, by);
     }
     int y = ay;
-    float error = 0;
+    float ierror = 0;
     for (int x=ax; x<=bx; x++) {
         if (steep) // if transposed, de−transpose
             framebuffer.set(y, x, color);
         else
             framebuffer.set(x, y, color);
-        error += std::abs(by-ay) / static_cast<float>(bx-ax);
-        if (error > 5) {
-            y += (by < ay) ? 1 : -1;
-            error -= 1.;
-        }
+        ierror += 2 * std::abs(by-ay);
+        y += (by < ay ? 1 : -1)  * (ierror > bx - ax);
+        ierror -= 2 * (bx - ax)  * (ierror > bx - ax);
     }
 }
 
@@ -39,8 +37,10 @@ int main(int argc, char** argv) {
     constexpr int height = 64;
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
+    getverts("obj/diablo3_pose/diablo3_pose.obj");
+
     std::srand(std::time({}));
-    for (int i=0; i<(1<<24); i++ ) {
+    for (int i=0; i<(1<<4); i++ ) {
         int ax = rand()%width, ay = rand()%height;
         int bx = rand()%width, by = rand()%height;
         line(ax, ay, bx, by, framebuffer, { static_cast<uint8_t>(rand()%255), static_cast<uint8_t>(rand()%255), static_cast<uint8_t>(rand()%255), static_cast<uint8_t>(rand()%255) });
