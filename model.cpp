@@ -1,7 +1,15 @@
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 // shitfuck
-void getverts(const std::string filename) {
+class Verts2d {
+    std::vector<std::pair<float, float>> verts;
 
-}
+    Verts2d(std::string filename) {
+        
+    }; 
+    
+public:
+
+};

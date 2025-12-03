@@ -1,7 +1,9 @@
 #include <cmath>
-#include "tgaimage.h"
 #include <cstdlib>
 #include <ctime>
+
+#include "model.h"
+#include "tgaimage.h"
 
 constexpr TGAColor white   = {255, 255, 255, 255}; // attention, BGRA order
 constexpr TGAColor green   = {  0, 255,   0, 255};
@@ -35,9 +37,11 @@ void line(int ax, int ay, int bx, int by, TGAImage &framebuffer, TGAColor color)
 int main(int argc, char** argv) {
     constexpr int width  = 64;
     constexpr int height = 64;
+
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
-    getverts("obj/diablo3_pose/diablo3_pose.obj");
+    // Verts2d Verts2d;
+    // getverts("obj/diablo3_pose/diablo3_pose.obj");
 
     std::srand(std::time({}));
     for (int i=0; i<(1<<4); i++ ) {
