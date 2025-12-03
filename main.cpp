@@ -40,8 +40,7 @@ int main(int argc, char** argv) {
 
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
-    // Verts2d Verts2d;
-    // getverts("obj/diablo3_pose/diablo3_pose.obj");
+    Verts2d verts2d("obj/diablo3_pose/diablo3_pose.obj");
 
     std::srand(std::time({}));
     for (int i=0; i<(1<<4); i++ ) {

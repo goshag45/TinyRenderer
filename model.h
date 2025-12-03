@@ -3,10 +3,8 @@
 #include <vector>
 
 class Verts2d {
+private:
     std::vector<std::pair<float, float>> verts;
-
-    Verts2d(std::string filename) {} ;
-    
 public:
-
+    Verts2d(std::string filename) {}; 
 };
