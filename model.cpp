@@ -31,8 +31,17 @@ public:
             }
             
             if (prefix == "f") {
-                int v1, v2, v3;
-                Face face = {v1, v2, v3};
+                std::string s1, s2, s3;
+                iss >> s1 >> s2 >> s3;
+
+                auto parseIndex = [](const std::string& token) {
+                    return std::stoi(token.substr(0, token.find('/')));
+                };
+
+                Face face;
+                face.v1 = parseIndex(s1);
+                face.v2 = parseIndex(s2);
+                face.v3 = parseIndex(s3);
                 faces.push_back(face);
             }
         }

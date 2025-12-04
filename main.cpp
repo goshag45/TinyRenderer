@@ -1,6 +1,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 #include "model.h"
 #include "tgaimage.h"
@@ -35,21 +36,30 @@ void line(int ax, int ay, int bx, int by, TGAImage &framebuffer, TGAColor color)
 }
 
 int main(int argc, char** argv) {
-    constexpr int width  = 64;
-    constexpr int height = 64;
+    constexpr int width  = 640;
+    constexpr int height = 640;
 
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
     Verts2d verts2d("obj/diablo3_pose/diablo3_pose.obj");
+    std::cout << "verts: " << verts2d.getverts().size() << "\n";
+    std::cout << "faces: " << verts2d.getfaces().size() << "\n";
 
+    // need to convert coordinates!!!!
     for (Verts2d::Face face : verts2d.getfaces()) {
         std::pair<float, float> a = verts2d.getverts()[face.v1 - 1];
         std::pair<float, float> b = verts2d.getverts()[face.v2 - 1];
         std::pair<float, float> c = verts2d.getverts()[face.v3 - 1];
+        a = std::pair((a.first+1.) * width/2, (a.second+1.) * height / 2);
+        b = std::pair((b.first+1.) * width/2, (b.second+1.) * height / 2);
+        c = std::pair((c.first+1.) * width / 2, (c.second+1.) * height / 2);
         line(a.first , a.second, b.first, b.second, framebuffer, red);
         line(b.first, b.second, c.first, c.second, framebuffer, red);
         line(c.first, c.second, a.first, a.second, framebuffer, red);
     }
+
+    
+
     framebuffer.write_tga_file("framebuffer.tga");
     return 0;
 }
