@@ -42,13 +42,14 @@ int main(int argc, char** argv) {
 
     Verts2d verts2d("obj/diablo3_pose/diablo3_pose.obj");
 
-    std::srand(std::time({}));
-    for (int i=0; i<(1<<4); i++ ) {
-        int ax = rand()%width, ay = rand()%height;
-        int bx = rand()%width, by = rand()%height;
-        line(ax, ay, bx, by, framebuffer, { static_cast<uint8_t>(rand()%255), static_cast<uint8_t>(rand()%255), static_cast<uint8_t>(rand()%255), static_cast<uint8_t>(rand()%255) });
+    for (Verts2d::Face face : verts2d.getfaces()) {
+        std::pair<float, float> a = verts2d.getverts()[face.v1 - 1];
+        std::pair<float, float> b = verts2d.getverts()[face.v2 - 1];
+        std::pair<float, float> c = verts2d.getverts()[face.v3 - 1];
+        line(a.first , a.second, b.first, b.second, framebuffer, red);
+        line(b.first, b.second, c.first, c.second, framebuffer, red);
+        line(c.first, c.second, a.first, a.second, framebuffer, red);
     }
-
     framebuffer.write_tga_file("framebuffer.tga");
     return 0;
 }
