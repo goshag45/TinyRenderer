@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
-    Verts2d verts2d("obj/diablo3_pose/diablo3_pose.obj");
+    Verts2d verts2d("C:\\Users\\George\\Documents\\_code\\TinyRenderer\\obj\\diablo3_pose\\diablo3_pose.obj");
     std::cout << "verts: " << verts2d.getverts().size() << "\n";
     std::cout << "faces: " << verts2d.getfaces().size() << "\n";
 
