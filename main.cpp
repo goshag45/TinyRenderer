@@ -30,14 +30,14 @@ void line(int ax, int ay, int bx, int by, TGAImage &framebuffer, TGAColor color)
         else
             framebuffer.set(x, y, color);
         ierror += 2 * std::abs(by-ay);
-        y += (by < ay ? 1 : -1)  * (ierror > bx - ax);
+        y += (by > ay ? 1 : -1)  * (ierror > bx - ax);
         ierror -= 2 * (bx - ax)  * (ierror > bx - ax);
     }
 }
 
 int main(int argc, char** argv) {
-    constexpr int width  = 640;
-    constexpr int height = 640;
+    constexpr int width  = 800;
+    constexpr int height = 800;
 
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
@@ -58,7 +58,11 @@ int main(int argc, char** argv) {
         line(c.first, c.second, a.first, a.second, framebuffer, red);
     }
 
-    
+    for (std::pair<float, float> v : verts2d.getverts()) {
+        int x = (v.first + 1.) * width / 2;
+        int y = (v.second + 1.) * height / 2;
+        framebuffer.set(x, y, white);
+    }
 
     framebuffer.write_tga_file("framebuffer.tga");
     return 0;

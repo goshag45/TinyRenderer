@@ -23,13 +23,11 @@ Verts2d::Verts2d(std::string filename) {
         std::istringstream iss(line);
         std::string prefix;
         iss >> prefix;
-        std::cout << "Line prefix: '" << prefix << "'\n";
 
         if (prefix == "v") {
             float x, y, z;
             iss >> x >> y >> z;
             verts.emplace_back(x, y);
-            std::cout << "Added vertex: " << x << ", " << y << "\n";
         }
 
         if (prefix == "f") {
@@ -45,7 +43,6 @@ Verts2d::Verts2d(std::string filename) {
             face.v2 = parseIndex(s2);
             face.v3 = parseIndex(s3);
             faces.push_back(face);
-            std::cout << "Added face: " << face.v1 << ", " << face.v2 << ", " << face.v3 << "\n";
         }
     }
 };
