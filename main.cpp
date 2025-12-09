@@ -42,13 +42,21 @@ void triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage &framebuf
     line(ax, ay, bx, by, framebuffer, color);
     line(bx, by, cx, cy, framebuffer, color);
     line(cx, cy, ax, ay, framebuffer, color);
+    double area = std::abs(
+        ax * (by - cy) + 
+        bx * (cy - ay) + 
+        cx * (ay - by)
+    ) / 2.0;
+    std::cout << area << "\n";
 }
 
 int main(int argc, char** argv) {
     TGAImage framebuffer(width, height, TGAImage::RGB);
+
     triangle(  7, 45, 35, 100, 45,  60, framebuffer, red);
     triangle(120, 35, 90,   5, 45, 110, framebuffer, white);
     triangle(115, 83, 80,  90, 85, 120, framebuffer, green);
+
     framebuffer.write_tga_file("framebuffer.tga");
     return 0;
 }
